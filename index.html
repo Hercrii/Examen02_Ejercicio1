@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Conexión Node.js + MySQL</title>
+
+</head>
+
+<body>
+
+    <h1>Lista de usuarios</h1>
+
+    <button onclick="cargarUsuarios()">Cargar Usuarios</button>
+
+    <ul id="lista"></ul>
+
+
+    <script>
+
+        async function cargarUsuarios() {
+
+            const respuesta = await fetch("http://localhost:3000/usuarios");
+
+            const datos = await respuesta.json();
+
+
+            const lista = document.getElementById("lista");
+
+            lista.innerHTML = "";
+
+
+            datos.forEach(u => {
+
+                const li = document.createElement("li");
+
+                li.textContent = `${u.nombre} - ${u.correo}`;
+
+                lista.appendChild(li);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
